@@ -1,0 +1,62 @@
+<?php
+$kafkaConf = include_once __DIR__."/conf/kafka.conf.php";
+include_once __DIR__."/libs/Redis.php";
+include_once __DIR__."/libs/Sms.php";
+
+$redisMod    = new RedisClient();
+$smsMod      = new Sms();  
+
+$conf = new RdKafka\Conf();
+$conf->set('group.id', $kafkaConf['group']);
+$conf->set('metadata.broker.list', $kafkaConf['brokerList']);
+$topicConf = new RdKafka\TopicConf();
+$topicConf->set('auto.offset.reset', 'smallest');
+$conf->setDefaultTopicConf($topicConf);
+$consumer = new RdKafka\KafkaConsumer($conf);
+$consumer->subscribe($kafkaConf['topic']);
+
+$count = 0; 
+$arr   = array();
+while(true) {   
+    $msg = $consumer->consume(1000);
+    if($msg->err == RD_KAFKA_RESP_ERR_NO_ERROR && $msg->payload != null) { 
+        $warning  =  json_decode($msg->payload, true); 
+        if($warning != '') {
+            $arr[]  =  $warning;
+        }     
+    }
+    if($count % 10 == 0) {
+        $arrCount = count($arr);
+        echo $arrCount."\n";
+        if($arrCount < $kafkaConf['maxNum'] && $arrCount >0) {           
+             //错误少的时候 循环发送
+             foreach ($arr as $v) { 
+                sendMsg($v['id'], $v['content']);              
+             }
+        }elseif($arrCount > $kafkaConf['maxNum']) {
+             //消息抖动 出现批量错误时候 发一条消息  等三分钟后再发  
+                sendMsg(1, '瞬间批量错误');
+        }
+        $arr = array();
+    }
+    echo $msg->payload."\n";
+    $count ++  ; 
+}
+
+//发送消息
+function  sendMsg($id='', $content='')
+{
+     global $redisMod;
+     global $smsMod;
+     global $kafkaConf;
+
+     $resMsg      =  false;
+     $msgInfo     =  $id.':'.$content;
+     $contentMd5  =  md5($content);
+     if(!$redisMod->get($contentMd5)) {
+          $smsMod->sendAllMsg($msgInfo);
+     }
+     if($resMsg) {
+        $redisMod->set($contentMd5, 1, 0, 0, $kafkaConf['maxTime']); 
+     }    
+}

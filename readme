@@ -1,0 +1,11 @@
+1.
+依赖：php7 rdkafka 扩展（前提的先安装librdkafka）
+/usr/local/php7/bin/phpize
+./configure  --with-php-config=/usr/local/php7/bin/php-config
+
+2. 给Logs 写入权限
+
+3.
+执行方法
+修改run.sh  里脚本路径 和 php路径
+nohup  ./run.sh > /dev/null

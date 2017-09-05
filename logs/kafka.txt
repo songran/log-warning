@@ -1,0 +1,2 @@
+2017/07/27 18:19:38 Local: Timed out
+2017/07/28 11:41:36 Local: Broker transport failure
