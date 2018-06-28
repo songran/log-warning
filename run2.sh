@@ -15,5 +15,5 @@ do
          nohup $phpfile $consumer &
     fi
     ps -ef|grep $consumer |awk '{print $2}'|xargs kill -HUP
-    sleep 5
+    sleep 60
 done  
