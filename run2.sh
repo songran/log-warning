@@ -14,5 +14,6 @@ do
     then
          nohup $phpfile $consumer &
     fi
+    ps -ef|grep $consumer |awk '{print $2}'|xargs kill -HUP
     sleep 5
 done  
