@@ -2,7 +2,7 @@
 #user:songran
 #des: daemon
 #  nohup  ./run.sh > /dev/null
-#  ./run.sh &
+#  nohup ./run.sh &
  
 consumer="/Users/songran/GitHub/local/log-warning/consumer.php"
 phpfile="/usr/local/php7/bin/php"
