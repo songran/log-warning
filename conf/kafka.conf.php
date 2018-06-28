@@ -1,7 +1,7 @@
 <?php
 return array(
 	'group'			 => 'mygroup',
-	'brokerList'     => "120.25.98.72:9092,",
-	'topic'			 => 'test',
+ 	'brokerList'     => "127.0.0.1:9092,",//39.105.50.68:9092
+	'topic'			 => 'hell123',
 	'maxNum'		 => 5,
  );

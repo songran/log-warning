@@ -1,7 +1,7 @@
 <?php
 $rk = new \RdKafka\Producer();
 $rk->setLogLevel(LOG_DEBUG);
-$rk->addBrokers("120.25.98.72:9092");
+$rk->addBrokers("127.0.0.1:9092");
 
 $topic = $rk->newTopic("test");
 

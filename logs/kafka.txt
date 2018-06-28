@@ -1,2 +1,18 @@
 2017/07/27 18:19:38 Local: Timed out
 2017/07/28 11:41:36 Local: Broker transport failure
+2018/06/11 18:08:00 Local: Broker transport failure
+2018/06/11 18:21:27 Local: Broker transport failure
+2018/06/12 19:40:18 Local: Broker transport failure
+2018/06/12 19:40:28 Local: Broker transport failure
+2018/06/15 10:49:00 Local: Broker transport failure
+2018/06/15 10:52:18 Local: Broker transport failure
+2018/06/15 11:24:32 Local: Broker transport failure
+2018/06/15 11:32:37 Local: Broker transport failure
+2018/06/15 11:48:01 Local: Broker transport failure
+2018/06/15 11:55:33 Local: Broker transport failure
+2018/06/15 11:57:26 Local: Broker transport failure
+2018/06/20 15:01:24 Local: Broker transport failure
+2018/06/20 15:04:13 Local: Broker transport failure
+2018/06/20 15:16:23 Local: Broker transport failure
+2018/06/20 15:19:00 Local: Broker transport failure
+2018/06/20 15:22:16 Local: Broker transport failure
